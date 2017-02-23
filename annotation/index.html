@@ -10,10 +10,45 @@
 
         <h1 id="title">Fail</h1>
 
-        <video src="https://www.cs.tufts.edu/comp/20/fail.mp4" id="failvideo" controls></video>
+        <video src="https://www.cs.tufts.edu/comp/20/fail.mp4" id="failvideo" controls ></video>
         <div id="lyrics"></div>
 
         <script>
+            function printTime() {
+                var elem = document.getElementById("lyrics");
+                var v = document.getElementById("failvideo");
+                var time = v.currentTime;
+                time = Math.floor(time);
+                if (time >= 9) {
+                    if (lyrics[time] == undefined) {
+                        while (lyrics[time] == undefined){
+                            time -= 1;
+                        }
+                    }
+                    elem.innerHTML = "<p> " + lyrics[time] + " </p>";
+                }
+            }
+            var lyrics = {
+                9:"You've got me feelin' emotions",
+                13:"Deeper than I've ever dreamed of",
+                17:"You've got me feelin' emotions",
+                21:"Higher than the heavens above",
+                25:"I feel good, I feel nice",
+                29:"I've never felt so satisfied",
+                33:"I'm in love, I'm alive",
+                37:"Intoxicated, flyin' high",
+                44:"Feels like a dream",
+                48:"When you touch me tenderly",
+                52:"I don't know if it's real",
+                56:"But I like the way I feel inside",
+                60:"You've got me feelin' emotions",
+                64:"Deeper than I've ever dreamed of",
+                68:"You've got me feelin' emotions",
+                72:"Higher than the heavens above"
+            }
+            var vid = document.getElementById("failvideo");
+            vid.addEventListener("timeupdate", printTime);
+            
         	// Complete this section and create a CSS file named style.css
         </script>
     </body>
