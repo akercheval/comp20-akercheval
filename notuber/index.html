@@ -24,7 +24,7 @@
 			var temppos;
 			var infowindow = new google.maps.InfoWindow();
 			var response;
-			var drivers = [];
+			var people = [];
 
 			function init()
 			{
@@ -50,14 +50,25 @@
 				xhr.open("POST","https://defense-in-derpth.herokuapp.com/submit", true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				var requeststr = "username=STgg85uu&lat=" + myLat + "&lng=" +myLng;
+				var what_am_i;
 				xhr.send(requeststr);
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4 && xhr.status == 200) {
 						response = JSON.parse(xhr.responseText);
-						for (count = 0; count < response.vehicles.length; count++) {
-							var tempdriver = [response.vehicles[count]["username"],
-							response.vehicles[count]["lat"], response.vehicles[count]["lng"]];
-							drivers.push(tempdriver);
+						if (Object.keys(response)[0] == "passengers") {
+							what_am_i = 'd';
+							for (count = 0; count < response.passengers.length; count++) {
+								var temp = [response.passengers[count]["username"],
+								response.passengers[count]["lat"], response.passengers[count]["lng"]];
+								people.push(temp);
+							}
+						} else if (Object.keys(response)[0] == "drivers") {
+							what_am_i = 'd';
+							for (count = 0; count < response.vehicles.length; count++) {
+								var temp = [response.vehicles[count]["username"],
+								response.vehicles[count]["lat"], response.vehicles[count]["lng"]];
+								people.push(temp);
+							}
 						}
 						renderMap();
 					}
@@ -87,7 +98,7 @@
 				return d;
 			};
 
-			function renderMap()
+			function renderMap(what_am_i)
 			{
 				me = new google.maps.LatLng(myLat, myLng);
 
@@ -102,15 +113,21 @@
 				marker.setMap(map);
 
 				//create new markers
-				for (count = 0; count < drivers.length; count++) {
-					var lat = drivers[count][1];
-					var lng = drivers[count][2];
+				for (count = 0; count < people.length; count++) {
+					var lat = people[count][1];
+					var lng = people[count][2];
 					var dist = getdist(myLat, myLng, lat, lng).toFixed(2);
+					var pic;
+					if (what_am_i == 'p') {
+						pic = "black_car.png";
+					} else {
+						pic = "jeb-bush.png";
+					}
 					temppos = new google.maps.LatLng(lat, lng);
 					newmarker = new google.maps.Marker({
 						position: temppos,
-						title: drivers[count][0] + ": <br>" + dist.toString() + " miles away",
-						icon: "black_car.png",
+						title: people[count][0] + ": <br>" + dist.toString() + " miles away",
+						icon: pic,
 					});
 
 					listenMarker(newmarker);
