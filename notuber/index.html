@@ -3,7 +3,7 @@
 <html>
 
 	<head>
-		<title>Geolocation Map Example</title>
+		<title>Not Your Grandmother's Uber</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 		<link rel="stylesheet" href="geolocation_map_style.css" />
@@ -14,7 +14,7 @@
 			var request = new XMLHttpRequest();
 			var me = new google.maps.LatLng(myLat, myLng);
 			var myOptions = {
-						zoom: 13,
+						zoom: 15,
 						center: me,
 						mapTypeId: google.maps.MapTypeId.ROADMAP
 					};
@@ -73,8 +73,7 @@
 				var lat1 = newLat;
 				var lon1 = newLng;
 
-				var R = 6371; // km
-				//has a problem with the .toRad() method below.
+				var R = 6371;
 				var x1 = lat2-lat1;
 				var dLat = x1.toRad();
 				var x2 = lon2-lon1;
