@@ -49,24 +49,21 @@
 				var xhr = new XMLHttpRequest();
 				xhr.open("POST","https://defense-in-derpth.herokuapp.com/submit", true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				var requeststr = "username=STgg85uu&lat=" + myLat + "&lng=" +myLng;
+				xhr.send(requeststr);
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4 && xhr.status == 200) {
 						response = JSON.parse(xhr.responseText);
-						//console.log(xhr.responseText);
 						for (count = 0; count < response.vehicles.length; count++) {
 							var tempdriver = [response.vehicles[count]["username"],
 							response.vehicles[count]["lat"], response.vehicles[count]["lng"]];
 							drivers.push(tempdriver);
-							//newData += "<p>" + elements[count]["content"] + " by " + elements[count].username + "</p>";
 						}
+						renderMap();
 					}
 				};
-				var requeststr = "username=STgg85uu&lat=" + myLat + "&lng=" +myLng;
-				//console.log(requeststr);
-				xhr.send(requeststr);
-				renderMap(drivers);
 			};
-			function renderMap(drivers)
+			function renderMap()
 			{
 				me = new google.maps.LatLng(myLat, myLng);
 
@@ -76,7 +73,8 @@
 				// Create a marker
 				marker = new google.maps.Marker({
 					position: me,
-					title: "Here I Am!"
+					title: "STgg85uu",
+					icon: "drizzy.png"
 				});
 				marker.setMap(map);
 
@@ -86,7 +84,11 @@
 					temppos = new google.maps.LatLng(drivers[count][1], drivers[count][2]);
 					newmarker = new google.maps.Marker({
 						position: temppos,
-						title: drivers[count][0]
+						title: drivers[count][0],
+						icon: "black_car.png"
+					});
+					newmarker.addListener('click', function() {
+  					infowindow.open(map, newmarker);
 					});
 					newmarker.setMap(map);
 				}
