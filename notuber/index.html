@@ -47,7 +47,7 @@
 			function makeRequest(myLat, myLng)
 			{
 				var xhr = new XMLHttpRequest();
-				xhr.open("POST","https://defense-in-derpth.herokuapp.com/submit", true);
+				xhr.open("POST", "https://whispering-badlands-53688.herokuapp.com/submit", true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				var requeststr = "username=STgg85uu&lat=" + myLat + "&lng=" +myLng;
 				var what_am_i;
@@ -63,7 +63,7 @@
 								people.push(temp);
 							}
 						} else if (Object.keys(response)[0] == "drivers") {
-							what_am_i = 'd';
+							what_am_i = 'p';
 							for (count = 0; count < response.vehicles.length; count++) {
 								var temp = [response.vehicles[count]["username"],
 								response.vehicles[count]["lat"], response.vehicles[count]["lng"]];
