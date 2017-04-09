@@ -62,7 +62,7 @@
 								response.passengers[count]["lat"], response.passengers[count]["lng"]];
 								people.push(temp);
 							}
-						} else if (Object.keys(response)[0] == "drivers") {
+						} else if (Object.keys(response)[0] == "vehicles") {
 							what_am_i = 'p';
 							for (count = 0; count < response.vehicles.length; count++) {
 								var temp = [response.vehicles[count]["username"],
@@ -70,7 +70,7 @@
 								people.push(temp);
 							}
 						}
-						renderMap();
+						renderMap(what_am_i);
 					}
 				};
 			};
@@ -114,8 +114,8 @@
 
 				//create new markers
 				for (count = 0; count < people.length; count++) {
-					var lat = people[count][1];
-					var lng = people[count][2];
+					var lat = parseFloat(people[count][1]);
+					var lng = parseFloat(people[count][2]);
 					var dist = getdist(myLat, myLng, lat, lng).toFixed(2);
 					var pic;
 					if (what_am_i == 'p') {
