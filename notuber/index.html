@@ -114,8 +114,8 @@
 
 				//create new markers
 				for (count = 0; count < people.length; count++) {
-					var lat = parseFloat(people[count][1]);
-					var lng = parseFloat(people[count][2]);
+					var lat = people[count][1];
+					var lng = people[count][2];
 					var dist = getdist(myLat, myLng, lat, lng).toFixed(2);
 					var pic;
 					if (what_am_i == 'p') {
