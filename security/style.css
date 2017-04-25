@@ -1,0 +1,22 @@
+body {
+    background-color: black;
+    color: lightgrey;
+    font-family: Helvetica;
+}
+a {
+    color: red;
+}
+h1, h2, h3 {
+    text-align: center;
+}
+img {
+    display: block;
+    margin: auto;
+    max-width: 1000px;
+    max-height: 1000px;
+}
+div {
+    display: block;
+    margin: auto;
+    text-align: center;
+}

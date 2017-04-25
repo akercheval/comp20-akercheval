@@ -47,7 +47,7 @@
 			function makeRequest(myLat, myLng)
 			{
 				var xhr = new XMLHttpRequest();
-				xhr.open("POST", "https://whispering-badlands-53688.herokuapp.com/submit", true);
+				xhr.open("POST", "http://whispering-badlands-53688.herokuapp.com/submit", true);
 				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				var requeststr = "username=STgg85uu&lat=" + myLat + "&lng=" +myLng;
 				var what_am_i;

